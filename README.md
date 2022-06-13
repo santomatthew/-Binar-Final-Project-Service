@@ -1,11 +1,11 @@
 # Second Hand 🔙🔚
 
-Backend Members :
+Members 👨‍👧‍👧 :
 
 ```
-- Kartika Fanya
-- Santo Matthew
-- Siti Haryati
+- Kartika Fanya 👩
+- Santo Matthew 👨‍🦱
+- Siti Haryati 👩
 
 ```
 
