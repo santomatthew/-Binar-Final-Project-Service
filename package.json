@@ -1,0 +1,21 @@
+{
+  "name": "FinalProject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitlab.com/santomatthew/backend-capstone-kel1.git",
+  "author": "santo matthew <matthewalesandro78@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.20.1",
+    "sequelize-cli": "^6.4.1"
+  },
+  "scripts": {
+    "start":"node .",
+    "migrate" : "sequelize-cli db:migrate",
+    "sequelize-cli": "sequelize-cli"
+  }
+}
