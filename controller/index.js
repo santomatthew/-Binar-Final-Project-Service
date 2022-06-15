@@ -10,4 +10,5 @@ module.exports = {
   // Products
   getProducts: require("./product/getproducts"),
   getProductById: require("./product/getproductbyid"),
+  postProduct: require("./product/postproduct"),
 };
