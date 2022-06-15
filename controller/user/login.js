@@ -1,5 +1,5 @@
 const { Users } = require("../../models");
-const decryptPass = require("../../../Chapter_6/challenge/controller/encrypt-decrypt/decrypt-pass");
+const decryptPass = require("../encrypt-decrypt/decrypt");
 
 async function login(req, res) {
   try {
@@ -23,7 +23,7 @@ async function login(req, res) {
         res.send("Silahkan mengisi password");
       }
     } else {
-      res.send("Username atau password salah");
+      res.status(401).send("Username atau password salah");
     }
   } catch (error) {
     res.send(error);
