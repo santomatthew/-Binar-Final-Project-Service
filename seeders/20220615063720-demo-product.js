@@ -1,7 +1,5 @@
 "use strict";
 
-const encryptPassword = require("../controller/encrypt-decrypt/encrypt");
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -13,11 +11,14 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert("users", [
+
+    await queryInterface.bulkInsert("products", [
       {
-        name: "Santo",
-        email: "santo@gmail.com",
-        password: await encryptPassword("12345678"),
+        name: "Jam",
+        price: 80000,
+        description: "Ini adalah jam terbaru",
+        photo: "http:google.com/pict1",
+        user_id: 1,
         created_at: new Date(),
         updated_at: new Date(),
       },

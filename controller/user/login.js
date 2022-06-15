@@ -1,5 +1,5 @@
 const { Users } = require("../../models");
-const decryptPass = require("../encrypt-decrypt/decrypt");
+const decryptPassword = require("../encrypt-decrypt/decrypt");
 
 async function login(req, res) {
   try {
@@ -10,7 +10,7 @@ async function login(req, res) {
 
     if (validateUser) {
       if (inputPassword) {
-        let checkDecryptPassword = await decryptPass(
+        let checkDecryptPassword = await decryptPassword(
           validateUser.password,
           inputPassword
         );

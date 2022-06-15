@@ -12,6 +12,10 @@ app.use(express.json());
 app.post("/api/v1/login", controller.login);
 app.post("/api/v1/register", controller.register);
 
+// Products
+app.get("/api/v1/products", controller.getProducts);
+app.get("/api/v1/product/:id", controller.getProductById);
+
 app.listen(PORT, () => {
   console.log(`Backend is running on port ${PORT}`);
 });
