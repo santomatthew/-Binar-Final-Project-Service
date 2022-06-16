@@ -1,20 +1,20 @@
 const { Products } = require("../../models");
 
 async function deleteProduct(req, res) {
-  const id = req.params.id;
-
   try {
-    await Products.destroy({ where: { id } })
+    const inputId = req.params.id;
 
-    if (Products) {
-      res.send(Products);
+    const checkProduct = await Products.findByPk(inputId);
+
+    if (checkProduct) {
+      await Products.destroy({ where: { id: inputId } });
+      res.send(`Product dengan id ${inputId} berhasil di hapus`);
     } else {
       res.status(404).send("Produk tidak ditemukan");
     }
   } catch (error) {
     res.send(error);
   }
-
 }
 
 module.exports = deleteProduct;
