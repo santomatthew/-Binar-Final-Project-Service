@@ -11,5 +11,7 @@ module.exports = {
   getProducts: require("./product/getproducts"),
   getProductById: require("./product/getproductbyid"),
   postProduct: require("./product/postproduct"),
-  putProduct: require("./product/putproduct")
+  putProduct: require("./product/putproduct"),
+  deleteProduct: require("./product/deleteproduct"),
+
 };
