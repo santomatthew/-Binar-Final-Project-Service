@@ -20,8 +20,6 @@ async function postProduct(req, res) {
     else{
         res.status(424).send(`Product tidak berhasil dibuat`)
     }
-
-
 }
 
 module.exports = postProduct;
