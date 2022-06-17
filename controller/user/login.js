@@ -1,5 +1,6 @@
 const { Users } = require("../../models");
 const decryptPassword = require("../encrypt-decrypt/decrypt");
+const jwt = require("jsonwebtoken");
 
 async function login(req, res) {
   try {
@@ -15,7 +16,16 @@ async function login(req, res) {
           inputPassword
         );
         if (checkDecryptPassword) {
-          res.send("Anda berhasil login");
+          let userData = {
+            id: validateUser.id,
+            name: validateUser.name,
+            email: validateUser.email,
+            is_seller: validateUser.is_seller,
+          };
+          let token = jwt.sign(userData, "s3cr3t");
+          res.status(200).json({
+            access_token: token,
+          });
         } else {
           res.send("Username atau password salah");
         }

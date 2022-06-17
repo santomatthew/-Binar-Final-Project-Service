@@ -14,4 +14,6 @@ module.exports = {
   putProduct: require("./product/putproduct"),
   deleteProduct: require("./product/deleteproduct"),
 
+  // Middleware
+  auth: require("./middleware/auth"),
 };
