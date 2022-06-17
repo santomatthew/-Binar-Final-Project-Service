@@ -23,6 +23,9 @@ app.delete(
   controller.deleteProduct
 );
 
+// Offer
+app.post("/api/v1/offerproduct/:id", controller.auth, controller.offerProduct);
+
 app.listen(PORT, () => {
   console.log(`Backend is running on port ${PORT}`);
 });
