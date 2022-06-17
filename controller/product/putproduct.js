@@ -1,7 +1,10 @@
 const { Products } = require("../../models");
+const jwt = require("jsonwebtoken");
 
 async function putProduct(req, res) {
   try {
+    let header = req.headers.authorization.split("Bearer ")[1];
+    let userData = jwt.verify(header, "s3cr3t");
     const inputId = req.params.id;
     const inputName = req.body.name;
     const inputPrice = req.body.price;
@@ -11,25 +14,33 @@ async function putProduct(req, res) {
 
     const product = await Products.findByPk(inputId);
 
-    if (product) {
-      const updateProduct = await Products.update(
-        {
-          name: inputName,
-          price: inputPrice,
-          category_id: inputCategory,
-          description: inputDescription,
-          photo: inputPhoto,
-        },
-        { where: { id: inputId } }
-      );
+    if (product.user_id == userData.id) {
+      if (product) {
+        const updateProduct = await Products.update(
+          {
+            name: inputName,
+            price: inputPrice,
+            category_id: inputCategory,
+            description: inputDescription,
+            photo: inputPhoto,
+          },
+          { where: { id: inputId } }
+        );
 
-      if (updateProduct) {
-        res.send(`update product ${req.params.id} berhasil`);
+        if (updateProduct) {
+          res.send(`update product ${req.params.id} berhasil`);
+        } else {
+          res.send("update product gagal");
+        }
       } else {
-        res.send("update product gagal");
+        res.send("Produk yang ingin di update tidak ada");
       }
     } else {
-      res.send("Produk yang ingin di update tidak ada");
+      res
+        .status(403)
+        .json({
+          message: "Anda tidak bisa mengupdate product yang bukan milik anda",
+        });
     }
   } catch (error) {
     res.send(error);
