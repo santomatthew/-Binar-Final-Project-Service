@@ -11,7 +11,16 @@ app.use(express.json());
 // Users
 app.post("/api/v1/login", controller.login);
 app.post("/api/v1/register", controller.register);
-
+app.get(
+  "/api/v1/listonsaleproducts",
+  controller.auth,
+  controller.productsOnSale
+);
+app.get(
+  "/api/v1/listinterestedproducts",
+  controller.auth,
+  controller.interestedProduct
+);
 // Products
 app.get("/api/v1/products", controller.getProducts);
 app.get("/api/v1/product/:id", controller.getProductById);
