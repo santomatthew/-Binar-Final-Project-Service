@@ -10,7 +10,6 @@ async function postProduct(req, res) {
     const inputCategory = req.body.category;
     const inputDescription = req.body.description;
     const inputPhoto = req.body.photo;
-    console.log(userData.id);
 
     const newProduct = await Products.create({
       name: inputName,
