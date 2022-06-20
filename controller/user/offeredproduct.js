@@ -4,7 +4,7 @@ const { Users } = require("../../models");
 
 const jwt = require("jsonwebtoken");
 
-async function interestedProduct(req, res) {
+async function offeredProduct(req, res) {
   try {
     let header = req.headers.authorization.split("Bearer ")[1];
     let userData = jwt.verify(header, "s3cr3t");
@@ -27,7 +27,8 @@ async function interestedProduct(req, res) {
           listInterestedProducts.push({
             name: listProductOnSale[i].name,
             bidder: bidder.name,
-            price: listOffers[j].price,
+            price: listProductOnSale[i].price,
+            offer_price: listOffers[j].price,
           });
         }
       }
@@ -43,4 +44,4 @@ async function interestedProduct(req, res) {
   }
 }
 
-module.exports = interestedProduct;
+module.exports = offeredProduct;

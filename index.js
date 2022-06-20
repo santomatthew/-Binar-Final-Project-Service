@@ -17,9 +17,9 @@ app.get(
   controller.productsOnSale
 );
 app.get(
-  "/api/v1/listinterestedproducts",
+  "/api/v1/listofferedproducts",
   controller.auth,
-  controller.interestedProduct
+  controller.offeredProduct
 );
 // Products
 app.get("/api/v1/products", controller.getProducts);
