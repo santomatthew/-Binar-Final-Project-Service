@@ -11,14 +11,29 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-
-    await queryInterface.bulkInsert("products", [
+    await queryInterface.bulkInsert("categories", [
       {
-        name: "Jam",
-        price: 80000,
-        description: "Ini adalah jam terbaru",
-        photo: "http:google.com/pict1",
-        user_id: 1,
+        name: "Hobi",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "Kendaraan",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "Baju",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "Elektronik",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "Kesehatan",
         created_at: new Date(),
         updated_at: new Date(),
       },
