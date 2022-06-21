@@ -1,8 +1,6 @@
 const { Products } = require("../../models");
 
 const jwt = require("jsonwebtoken");
-const offerProduct = require("../offer/offerproduct");
-const e = require("express");
 
 async function productsOnSale(req, res) {
   try {
@@ -10,7 +8,7 @@ async function productsOnSale(req, res) {
     let userData = jwt.verify(header, "s3cr3t");
 
     let listProductsOnSale = await Products.findAll({
-      where: { user_id: userData.id },
+      where: { user_id: userData.id, is_sold: false },
     });
 
     if (listProductsOnSale) {

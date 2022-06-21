@@ -28,19 +28,17 @@ async function putProduct(req, res) {
         );
 
         if (updateProduct) {
-          res.send(`update product ${req.params.id} berhasil`);
+          res.json({ message: `Update product ${req.params.id} berhasil` });
         } else {
-          res.send("update product gagal");
+          res.json({ message: "update product gagal" });
         }
       } else {
-        res.send("Produk yang ingin di update tidak ada");
+        res.json({ message: "Produk yang ingin di update tidak ada" });
       }
     } else {
-      res
-        .status(403)
-        .json({
-          message: "Anda tidak bisa mengupdate product yang bukan milik anda",
-        });
+      res.status(403).json({
+        message: "Anda tidak bisa mengupdate product yang bukan milik anda",
+      });
     }
   } catch (error) {
     res.send(error);
