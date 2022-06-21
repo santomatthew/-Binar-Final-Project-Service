@@ -4,6 +4,7 @@ module.exports = {
   register: require("./user/register"),
   productsOnSale: require("./user/productsonsale"),
   offeredProduct: require("./user/offeredproduct"),
+  soldProduct: require("./user/soldproduct"),
 
   //   Encrypt & Decrypt
   encryptPassword: require("./encrypt-decrypt/encrypt"),

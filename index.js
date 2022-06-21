@@ -21,6 +21,7 @@ app.get(
   controller.auth,
   controller.offeredProduct
 );
+app.get("/api/v1/listsoldproducts", controller.auth, controller.soldProduct);
 // Products
 app.get("/api/v1/products", controller.getProducts);
 app.get("/api/v1/product/:id", controller.getProductById);
