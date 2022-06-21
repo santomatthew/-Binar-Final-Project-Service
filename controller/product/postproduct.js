@@ -21,9 +21,9 @@ async function postProduct(req, res) {
     });
 
     if (newProduct) {
-      res.status(201).send(`Product ${inputName} berhasil dibuat`);
+      res.status(201).json({ message: `Product ${inputName} berhasil dibuat` });
     } else {
-      res.status(424).send(`Product tidak berhasil dibuat`);
+      res.status(424).json({ message: `Product tidak berhasil dibuat` });
     }
   } catch (error) {
     res.send(error);
