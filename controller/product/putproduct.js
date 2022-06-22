@@ -15,7 +15,6 @@ async function putProduct(req, res) {
           name: product.name,
           price: product.price,
           description: product.description,
-          photo: product.photo,
           category_id: product.category_id,
         };
         productData = Object.assign(productData, req.body);
