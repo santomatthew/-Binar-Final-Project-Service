@@ -1,4 +1,4 @@
-const { Products } = require("../../models");
+const { Products, Photos } = require("../../models");
 
 async function getProductById(req, res) {
   try {
@@ -9,7 +9,24 @@ async function getProductById(req, res) {
     });
 
     if (product) {
-      res.send(product);
+      let data = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        category_id: product.category_id,
+        description: product.description,
+        user_id: product.user_id,
+        is_sold: product.is_sold,
+        photos: [],
+      };
+
+      const listPhotos = await Photos.findAll({
+        where: { product_id: data.id },
+      });
+      for (let j in listPhotos) {
+        data.photos.push(listPhotos[j].name);
+      }
+      res.send(data);
     } else {
       res.status(404).json({ message: "Produk tidak ditemukan" });
     }
