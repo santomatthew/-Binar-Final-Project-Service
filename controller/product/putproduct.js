@@ -26,7 +26,7 @@ async function putProduct(req, res) {
         if (updateProduct) {
           res.json({ message: `Update product ${req.params.id} berhasil` });
         } else {
-          res.json({ message: "update product gagal" });
+          res.json({ message: "Update product gagal" });
         }
       } else {
         res.json({ message: "Produk yang ingin di update tidak ada" });
