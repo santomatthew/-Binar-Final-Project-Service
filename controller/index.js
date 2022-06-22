@@ -15,7 +15,7 @@ module.exports = {
   getProducts: require("./product/getproducts"),
   getProductById: require("./product/getproductbyid"),
   postProduct: require("./product/postproduct"),
-  postPhotoProduct: require("./product/postphotoproduct"),
+
   putProduct: require("./product/putproduct"),
   deleteProduct: require("./product/deleteproduct"),
 
@@ -25,4 +25,5 @@ module.exports = {
   // Middleware
   auth: require("./middleware/auth"),
   uploadPhoto: require("./middleware/upload"),
+  postPhoto: require("./middleware/postphoto"),
 };
