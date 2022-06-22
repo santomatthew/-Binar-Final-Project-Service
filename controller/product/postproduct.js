@@ -1,4 +1,4 @@
-const { Products } = require("../../models");
+const { Products, Photos } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 async function postProduct(req, res) {
@@ -16,11 +16,16 @@ async function postProduct(req, res) {
       price: inputPrice,
       category_id: inputCategory,
       description: inputDescription,
-      photo: inputPhoto,
       user_id: userData.id,
     });
 
     if (newProduct) {
+      for (let i in inputPhoto) {
+        await Photos.create({
+          name: inputPhoto[i],
+          product_id: newProduct.id,
+        });
+      }
       res.status(201).json({ message: `Product ${inputName} berhasil dibuat` });
     } else {
       res.status(424).json({ message: `Product tidak berhasil dibuat` });

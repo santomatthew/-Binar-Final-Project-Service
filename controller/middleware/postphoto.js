@@ -1,4 +1,4 @@
-function postPhotoProduct(req, res) {
+function postPhoto(req, res) {
   try {
     res.status(200).json({
       path: req.file.path,
@@ -10,4 +10,4 @@ function postPhotoProduct(req, res) {
   }
 }
 
-module.exports = postPhotoProduct;
+module.exports = postPhoto;
