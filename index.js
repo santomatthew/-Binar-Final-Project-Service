@@ -13,6 +13,11 @@ app.use(express.json());
 // Users
 app.post("/api/v1/login", controller.login);
 app.post("/api/v1/register", controller.register);
+app.post(
+  "/api/v1/uploadphoto/",
+  controller.uploadPhoto.user,
+  controller.postPhoto
+);
 app.put("/api/v1/update/:id", controller.auth, controller.details);
 app.get(
   "/api/v1/listonsaleproducts",
@@ -33,7 +38,7 @@ app.post("/api/v1/newproduct", controller.auth, controller.postProduct);
 app.post(
   "/api/v1/uploadphotoproduct",
   controller.uploadPhoto.product,
-  controller.postPhotoProduct
+  controller.postPhoto
 );
 app.put("/api/v1/updateproduct/:id", controller.auth, controller.putProduct);
 app.delete(

@@ -16,7 +16,6 @@ module.exports = {
         name: "Jam",
         price: 80000,
         description: "Ini adalah jam terbaru",
-        photo: "http:google.com/pict1",
         user_id: 1,
         created_at: new Date(),
         updated_at: new Date(),
