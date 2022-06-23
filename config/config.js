@@ -25,7 +25,7 @@ module.exports = {
     password: null,
     database: "database_test",
     host: "127.0.0.1",
-    dialect: "mysql",
+    dialect: "postgres",
   },
   production: {
     username: DB_USER,
@@ -33,6 +33,6 @@ module.exports = {
     database: DB_NAME,
     host: DB_HOST,
     port: DB_PORT,
-    dialect: "mysql",
+    dialect: "postgres",
   },
 };

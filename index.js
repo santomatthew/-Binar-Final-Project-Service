@@ -8,7 +8,9 @@ const controller = require("./controller");
 app.use(cors());
 app.use(express.json());
 
-// app.get("/", (req, res) => {});
+app.get("/", (req, res) => {
+  res.send("Berhasil deploy");
+});
 
 // Users
 app.post("/api/v1/login", controller.login);
