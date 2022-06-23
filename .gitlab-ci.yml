@@ -2,12 +2,6 @@ stages:
   - cleancode
   - deploy
 
-Unit Testing:
-  stage: test
-  image: node:latest
-  script:
-    - npm install
-
 Deploy to Heroku:
   stage: deploy
   image: ruby:latest
