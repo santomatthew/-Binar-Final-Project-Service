@@ -15,6 +15,7 @@ module.exports = {
       {
         name: "Jam",
         price: 80000,
+        category_id: 4,
         description: "Ini adalah jam terbaru",
         user_id: 1,
         created_at: new Date(),
