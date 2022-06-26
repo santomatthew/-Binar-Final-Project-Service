@@ -1,4 +1,4 @@
-const { Products, Photos } = require("../../models");
+const { Products, Users, Photos } = require("../../models");
 
 async function getProductById(req, res) {
   try {
@@ -9,13 +9,14 @@ async function getProductById(req, res) {
     });
 
     if (product) {
+      const ownerProduct = await Users.findByPk(product.user_id);
       let data = {
         id: product.id,
         name: product.name,
         price: product.price,
         category_id: product.category_id,
         description: product.description,
-        user_id: product.user_id,
+        user_name: ownerProduct.name,
         is_sold: product.is_sold,
         photos: [],
       };
