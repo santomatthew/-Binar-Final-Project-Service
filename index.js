@@ -20,7 +20,7 @@ app.post(
   controller.uploadPhoto.user,
   controller.postPhoto
 );
-app.put("/api/v1/update/:id", controller.auth, controller.details);
+app.put("/api/v1/update", controller.auth, controller.details);
 app.get(
   "/api/v1/listonsaleproducts",
   controller.auth,

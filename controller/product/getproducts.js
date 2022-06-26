@@ -1,4 +1,4 @@
-const { Products, Photos, sequelize } = require("../../models");
+const { Products, Photos, Users, sequelize } = require("../../models");
 
 async function getProduct(req, res) {
   try {
@@ -11,13 +11,14 @@ async function getProduct(req, res) {
     const products = [];
 
     for (let i in listProducts) {
+      const ownerProduct = await Users.findByPk(listProducts[i].user_id);
       let data = {
         id: listProducts[i].id,
         name: listProducts[i].name,
         price: listProducts[i].price,
         category_id: listProducts[i].category_id,
         description: listProducts[i].description,
-        user_id: listProducts[i].user_id,
+        user_name: ownerProduct.name,
         is_sold: listProducts[i].is_sold,
         photos: [],
       };
