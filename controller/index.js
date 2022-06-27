@@ -6,6 +6,7 @@ module.exports = {
   offeredProduct: require("./user/offeredproduct"),
   soldProduct: require("./user/soldproduct"),
   details: require("./user/details"),
+  notification: require("./user/notification"),
 
   //   Encrypt & Decrypt
   encryptPassword: require("./encrypt-decrypt/encrypt"),

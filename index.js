@@ -32,6 +32,7 @@ app.get(
   controller.offeredProduct
 );
 app.get("/api/v1/listsoldproducts", controller.auth, controller.soldProduct);
+app.get("/api/v1/notification", controller.auth, controller.notification);
 
 // Products
 app.get("/api/v1/products", controller.getProducts);
