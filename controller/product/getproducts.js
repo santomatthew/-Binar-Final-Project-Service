@@ -1,4 +1,10 @@
-const { Products, Photos, Users, sequelize } = require("../../models");
+const {
+  Products,
+  Photos,
+  Users,
+  Categories,
+  sequelize,
+} = require("../../models");
 
 async function getProduct(req, res) {
   try {
@@ -12,16 +18,32 @@ async function getProduct(req, res) {
 
     for (let i in listProducts) {
       const ownerProduct = await Users.findByPk(listProducts[i].user_id);
-      let data = {
-        id: listProducts[i].id,
-        name: listProducts[i].name,
-        price: listProducts[i].price,
-        category_id: listProducts[i].category_id,
-        description: listProducts[i].description,
-        user_name: ownerProduct.name,
-        is_sold: listProducts[i].is_sold,
-        photos: [],
-      };
+      const category = await Categories.findByPk(listProducts[i].category_id);
+      let data = {};
+      if (category) {
+        data = {
+          id: listProducts[i].id,
+          name: listProducts[i].name,
+          price: listProducts[i].price,
+          category: category.name,
+          description: listProducts[i].description,
+          user_name: ownerProduct.name,
+          is_sold: listProducts[i].is_sold,
+          photos: [],
+        };
+      } else {
+        data = {
+          id: listProducts[i].id,
+          name: listProducts[i].name,
+          price: listProducts[i].price,
+          category: "Tidak ada kategori",
+          description: listProducts[i].description,
+          user_name: ownerProduct.name,
+          is_sold: listProducts[i].is_sold,
+          photos: [],
+        };
+      }
+
       for (let j in listPhotos) {
         if (listPhotos[j].product_id == listProducts[i].id) {
           data.photos.push(listPhotos[j].name);
