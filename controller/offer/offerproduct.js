@@ -15,7 +15,6 @@ async function offerProduct(req, res) {
     let checkOffer = await Offers.findOne({
       where: { product_id: inputProductId, bidder_id: userData.id },
     });
-    console.log(checkOffer);
 
     if (checkOffer) {
       res.status(409).json({
