@@ -23,7 +23,7 @@ async function notification(req, res) {
           where: { product_id: products[i].id },
         });
         let productData = {
-          message: "Berhasil di terbitkan",
+          title: "Berhasil di terbitkan",
           name: products[i].name,
           price: products[i].price,
           date: products[i].createdAt,
@@ -40,7 +40,7 @@ async function notification(req, res) {
         for (let j in offers) {
           if (offers[j].product_id == products[i].id) {
             let offerData = {
-              message: "Penawaran Produk",
+              title: "Penawaran Produk",
               name: products[i].name,
               price: products[i].price,
               bid_price: offers[j].price,
@@ -52,7 +52,35 @@ async function notification(req, res) {
         }
       }
 
-      res.send(listNotifications);
+      let offeredProducts = await Offers.findAll({
+        where: { bidder_id: user.id },
+      });
+
+      if (offeredProducts) {
+        for (let k in offeredProducts) {
+          let product = await Products.findByPk(offeredProducts[k].product_id);
+          let photo = await Photos.findOne({
+            where: { product_id: product.id },
+          });
+          let data = {
+            title: "Penawaran Produk",
+            name: product.name,
+            price: product.price,
+            bid_price: offeredProducts[k].price,
+            photo: photo.name,
+            date: offeredProducts[k].createdAt,
+            message: "Kamu akan segera dihubungi penjual via whatsapp",
+          };
+
+          listNotifications.push(data);
+        }
+      }
+
+      res.send(
+        listNotifications.sort((a, b) => {
+          return new Date(a.date) - new Date(b.date);
+        })
+      );
     } else {
       res.json({
         message: "Bugs",
