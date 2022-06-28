@@ -29,7 +29,9 @@ Members 👨‍👧‍👧 :
 
 ## 🔍Endpoints
 
-Soon
+```javascript
+const endpoint = "https://secondhand-kel1.herokuapp.com";
+```
 
 ## ⭐Tech
 
