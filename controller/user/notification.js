@@ -13,41 +13,37 @@ async function notification(req, res) {
         where: { user_id: user.id, is_sold: false },
       });
 
-      let products = listProducts.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-
       let listNotifications = [];
-      for (let i in products) {
-        let photo = await Photos.findOne({
-          where: { product_id: products[i].id },
-        });
-        let productData = {
-          title: "Berhasil di terbitkan",
-          name: products[i].name,
-          price: products[i].price,
-          date: products[i].createdAt,
-          photo: photo.name,
-        };
-        listNotifications.push(productData);
-        let listOffers = await Offers.findAll({
-          where: { product_id: products[i].id },
-        });
 
-        let offers = listOffers.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date);
-        });
-        for (let j in offers) {
-          if (offers[j].product_id == products[i].id) {
-            let offerData = {
-              title: "Penawaran Produk",
-              name: products[i].name,
-              price: products[i].price,
-              bid_price: offers[j].price,
-              photo: photo.name,
-              date: offers[j].createdAt,
-            };
-            listNotifications.push(offerData);
+      if (listProducts) {
+        for (let i in listProducts) {
+          let photo = await Photos.findOne({
+            where: { product_id: listProducts[i].id },
+          });
+          let productData = {
+            title: "Berhasil di terbitkan",
+            name: listProducts[i].name,
+            price: listProducts[i].price,
+            date: listProducts[i].createdAt,
+            photo: photo.name,
+          };
+          listNotifications.push(productData);
+          let listOffers = await Offers.findAll({
+            where: { product_id: listProducts[i].id },
+          });
+
+          for (let j in listOffers) {
+            if (listOffers[j].product_id == listProducts[i].id) {
+              let offerData = {
+                title: "Penawaran Produk",
+                name: listProducts[i].name,
+                price: listProducts[i].price,
+                bid_price: listOffers[j].price,
+                photo: photo.name,
+                date: listOffers[j].createdAt,
+              };
+              listNotifications.push(offerData);
+            }
           }
         }
       }
@@ -58,21 +54,36 @@ async function notification(req, res) {
 
       if (offeredProducts) {
         for (let k in offeredProducts) {
-          let product = await Products.findByPk(offeredProducts[k].product_id);
+          let product = await Products.findOne({
+            where: { id: offeredProducts[k].product_id, is_sold: false },
+          });
           let photo = await Photos.findOne({
             where: { product_id: product.id },
           });
-          let data = {
-            title: "Penawaran Produk",
-            name: product.name,
-            price: product.price,
-            bid_price: offeredProducts[k].price,
-            photo: photo.name,
-            date: offeredProducts[k].createdAt,
-            message: "Kamu akan segera dihubungi penjual via whatsapp",
-          };
+          if (product) {
+            let data = {
+              title: "Penawaran Produk",
+              name: product.name,
+              price: product.price,
+              bid_price: offeredProducts[k].price,
+              photo: photo.name,
+              date: offeredProducts[k].createdAt,
+            };
+            listNotifications.push(data);
 
-          listNotifications.push(data);
+            if (offeredProducts[k].status == true) {
+              let data = {
+                title: "Penawaran Produk",
+                name: product.name,
+                price: product.price,
+                bid_price: offeredProducts[k].price,
+                photo: photo.name,
+                date: offeredProducts[k].createdAt,
+                message: "Kamu akan segera dihubungi penjual via whatsapp",
+              };
+              listNotifications.push(data);
+            }
+          }
         }
       }
 
