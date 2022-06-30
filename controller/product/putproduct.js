@@ -1,4 +1,4 @@
-const { Products } = require("../../models");
+const { Products, Notifications } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 async function putProduct(req, res) {
@@ -24,6 +24,11 @@ async function putProduct(req, res) {
         });
 
         if (updateProduct) {
+          await Notifications.create({
+            user_id: userData.id,
+            product_id: inputId,
+            title: "Berhasil di update",
+          });
           res.json({ message: `Update product ${req.params.id} berhasil` });
         } else {
           res.json({ message: "Update product gagal" });

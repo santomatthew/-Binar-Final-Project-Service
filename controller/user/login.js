@@ -20,7 +20,6 @@ async function login(req, res) {
             id: validateUser.id,
             name: validateUser.name,
             email: validateUser.email,
-            is_seller: validateUser.is_seller,
           };
           let token = jwt.sign(userData, "s3cr3t");
           res.status(200).json({

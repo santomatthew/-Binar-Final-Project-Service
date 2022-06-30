@@ -22,6 +22,7 @@ module.exports = {
 
   // Offer Product
   offerProduct: require("./offer/offerproduct"),
+  updateOffer: require("./offer/updateoffer"),
 
   // Middleware
   auth: require("./middleware/auth"),
