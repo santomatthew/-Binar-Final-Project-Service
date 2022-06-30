@@ -1,6 +1,4 @@
-// const { Users } = require("../../models");
-const { Products } = require("../../models");
-const { Offers } = require("../../models");
+const { Products, Offers, Users, Notifications } = require("../../models");
 
 const jwt = require("jsonwebtoken");
 
@@ -31,6 +29,20 @@ async function offerProduct(req, res) {
             price: inputPrice,
             bidder_id: userData.id,
           });
+
+          for (let i = 0; i <= 1; i++) {
+            let id = userData.id;
+            if (i % 2 == 1) {
+              let owner = await Users.findByPk(product.user_id);
+              id = owner.id;
+            }
+
+            await Notifications.create({
+              user_id: id,
+              product_id: product.id,
+              title: "Penawaran produk",
+            });
+          }
 
           res.status(201).json({
             message: `Tawaran harga pada produk ${product.name} berhasil dibuat. Silahkan menunggu respon dari penjual`,

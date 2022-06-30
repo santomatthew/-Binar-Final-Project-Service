@@ -1,4 +1,10 @@
-const { Users, Offers, Products, Photos } = require("../../models");
+const {
+  Users,
+  Offers,
+  Products,
+  Photos,
+  Notifications,
+} = require("../../models");
 const jwt = require("jsonwebtoken");
 
 async function notification(req, res) {
@@ -9,93 +15,55 @@ async function notification(req, res) {
     let user = await Users.findByPk(userData.id);
 
     if (user) {
-      let listProducts = await Products.findAll({
-        where: { user_id: user.id, is_sold: false },
+      let listNotification = [];
+
+      let getNotification = await Notifications.findAll({
+        where: {
+          user_id: user.id,
+        },
       });
 
-      let listNotifications = [];
+      for (let i in getNotification) {
+        let getProduct = await Products.findByPk(getNotification[i].product_id);
+        let getBidPrice = await Offers.findOne({
+          where: {
+            product_id: getNotification[i].product_id,
+            bidder_id: getNotification[i].user_id,
+          },
+        });
+        let getPhoto = await Photos.findOne({
+          where: { product_id: getNotification[i].product_id },
+        });
 
-      if (listProducts) {
-        for (let i in listProducts) {
-          let photo = await Photos.findOne({
-            where: { product_id: listProducts[i].id },
-          });
-          let productData = {
-            title: "Berhasil di terbitkan",
-            name: listProducts[i].name,
-            price: listProducts[i].price,
-            date: listProducts[i].createdAt,
-            photo: photo.name,
+        if (getBidPrice) {
+          let notificationData = {
+            title: getNotification[i].title,
+            name: getProduct.name,
+            price: getProduct.price,
+            bid_price: getBidPrice.price,
+            photo: getPhoto.name,
+            date: getNotification[i].createdAt,
           };
-          listNotifications.push(productData);
-          let listOffers = await Offers.findAll({
-            where: { product_id: listProducts[i].id },
-          });
-
-          for (let j in listOffers) {
-            if (listOffers[j].product_id == listProducts[i].id) {
-              let offerData = {
-                title: "Penawaran Produk",
-                name: listProducts[i].name,
-                price: listProducts[i].price,
-                bid_price: listOffers[j].price,
-                photo: photo.name,
-                date: listOffers[j].createdAt,
-              };
-              listNotifications.push(offerData);
-            }
-          }
+          listNotification.push(notificationData);
+        } else {
+          let notificationData = {
+            title: getNotification[i].title,
+            name: getProduct.name,
+            price: getProduct.price,
+            photo: getPhoto.name,
+            date: getNotification[i].createdAt,
+          };
+          listNotification.push(notificationData);
         }
       }
 
-      let offeredProducts = await Offers.findAll({
-        where: { bidder_id: user.id },
-      });
-
-      if (offeredProducts) {
-        for (let k in offeredProducts) {
-          let product = await Products.findOne({
-            where: { id: offeredProducts[k].product_id, is_sold: false },
-          });
-          let photo = await Photos.findOne({
-            where: { product_id: product.id },
-          });
-          if (product) {
-            let data = {
-              title: "Penawaran Produk",
-              name: product.name,
-              price: product.price,
-              bid_price: offeredProducts[k].price,
-              photo: photo.name,
-              date: offeredProducts[k].createdAt,
-            };
-            listNotifications.push(data);
-
-            if (offeredProducts[k].status == true) {
-              let data = {
-                title: "Penawaran Produk",
-                name: product.name,
-                price: product.price,
-                bid_price: offeredProducts[k].price,
-                photo: photo.name,
-                date: offeredProducts[k].createdAt,
-                message: "Kamu akan segera dihubungi penjual via whatsapp",
-              };
-              listNotifications.push(data);
-            }
-          }
-        }
+      if (listNotification.length > 0) {
+        res.send(listNotification);
+      } else {
+        res.json({ message: "Anda tidak memiliki notifikasi" });
       }
-
-      res.send(
-        listNotifications.sort((a, b) => {
-          return new Date(a.date) - new Date(b.date);
-        })
-      );
     } else {
-      res.json({
-        message: "Bugs",
-      });
+      res.json({ message: "Bugs" });
     }
   } catch (error) {
     res.send(error);
