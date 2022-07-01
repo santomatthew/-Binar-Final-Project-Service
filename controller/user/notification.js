@@ -24,27 +24,39 @@ async function notification(req, res) {
       });
 
       for (let i in getNotification) {
-        let getProduct = await Products.findByPk(getNotification[i].product_id);
-        let getBidPrice = await Offers.findOne({
-          where: {
-            product_id: getNotification[i].product_id,
-            bidder_id: getNotification[i].user_id,
-          },
-        });
-        let getPhoto = await Photos.findOne({
-          where: { product_id: getNotification[i].product_id },
+        const getProduct = await Products.findByPk(
+          getNotification[i].product_id
+        );
+        const getPhoto = await Photos.findOne({
+          where: { product_id: getProduct.id },
         });
 
-        if (getBidPrice) {
-          let notificationData = {
-            title: getNotification[i].title,
-            name: getProduct.name,
-            price: getProduct.price,
-            bid_price: getBidPrice.price,
-            photo: getPhoto.name,
-            date: getNotification[i].createdAt,
-          };
-          listNotification.push(notificationData);
+        const getBid = await Offers.findOne({
+          where: { id: getNotification[i].offer_id },
+        });
+
+        if (getBid) {
+          if (getProduct.user_id == user.id) {
+            let notificationData = {
+              title: getNotification[i].title,
+              name: getProduct.name,
+              price: getProduct.price,
+              bid_price: getBid.price,
+              photo: getPhoto.name,
+              date: getNotification[i].createdAt,
+            };
+            listNotification.push(notificationData);
+          } else {
+            let notificationData = {
+              title: getNotification[i].title,
+              name: getProduct.name,
+              price: getProduct.price,
+              bid_price: getBid.price,
+              photo: getPhoto.name,
+              date: getNotification[i].createdAt,
+            };
+            listNotification.push(notificationData);
+          }
         } else {
           let notificationData = {
             title: getNotification[i].title,
@@ -58,7 +70,11 @@ async function notification(req, res) {
       }
 
       if (listNotification.length > 0) {
-        res.send(listNotification);
+        res.send(
+          listNotification.sort(function (a, b) {
+            return new Date(a.date) - new Date(b.date);
+          })
+        );
       } else {
         res.json({ message: "Anda tidak memiliki notifikasi" });
       }
