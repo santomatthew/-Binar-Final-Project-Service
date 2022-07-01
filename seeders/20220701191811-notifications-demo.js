@@ -11,22 +11,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert("products", [
+    await queryInterface.bulkInsert("notifications", [
       {
-        name: "Jam Beker",
-        price: 80000,
-        category_id: 4,
-        description: "Ini adalah jam Beker legenda",
         user_id: 1,
+        product_id: 1,
+        title: "Berhasil diterbitkan",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        name: "Smartwatch",
-        price: 3000000,
-        category_id: 4,
-        description: "Smartwatch merk imooo",
         user_id: 1,
+        product_id: 2,
+        title: "Berhasil diterbitkan",
         created_at: new Date(),
         updated_at: new Date(),
       },
