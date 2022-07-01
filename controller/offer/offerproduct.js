@@ -24,7 +24,7 @@ async function offerProduct(req, res) {
 
       if (inputPrice) {
         if (inputPrice < product.price) {
-          await Offers.create({
+          let offer = await Offers.create({
             product_id: product.id,
             price: inputPrice,
             bidder_id: userData.id,
@@ -40,6 +40,7 @@ async function offerProduct(req, res) {
             await Notifications.create({
               user_id: id,
               product_id: product.id,
+              offer_id: offer.id,
               title: "Penawaran produk",
             });
           }

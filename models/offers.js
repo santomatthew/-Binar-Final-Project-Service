@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Offers.init({
     product_id: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
-    bidder_id: DataTypes.INTEGER
+    bidder_id: DataTypes.INTEGER,
+    status: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Offers',
