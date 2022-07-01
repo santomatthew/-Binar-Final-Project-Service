@@ -20,7 +20,7 @@
     "sequelize-cli": "^6.4.1"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "migrate": "sequelize-cli db:migrate",
     "sequelize-cli": "sequelize-cli",
     "lint": "eslint ./ --resolve-plugins-relative-to .",
