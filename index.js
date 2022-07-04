@@ -33,6 +33,11 @@ app.get(
 );
 app.get("/api/v1/listsoldproducts", controller.auth, controller.soldProduct);
 app.get("/api/v1/notification", controller.auth, controller.notification);
+app.put(
+  "/api/v1/updatenotif/:id",
+  controller.auth,
+  controller.updateNotification
+);
 
 // Products
 app.get("/api/v1/products", controller.getProducts);
