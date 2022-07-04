@@ -7,6 +7,7 @@ module.exports = {
   soldProduct: require("./user/soldproduct"),
   details: require("./user/details"),
   notification: require("./user/notification"),
+  updateNotification: require("./user/updatenotification"),
 
   //   Encrypt & Decrypt
   encryptPassword: require("./encrypt-decrypt/encrypt"),
@@ -16,7 +17,6 @@ module.exports = {
   getProducts: require("./product/getproducts"),
   getProductById: require("./product/getproductbyid"),
   postProduct: require("./product/postproduct"),
-
   putProduct: require("./product/putproduct"),
   deleteProduct: require("./product/deleteproduct"),
 

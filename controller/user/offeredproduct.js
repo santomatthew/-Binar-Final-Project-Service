@@ -25,7 +25,7 @@ async function offeredProduct(req, res) {
           const bidder = await Users.findByPk(listOffers[j].bidder_id);
 
           listInterestedProducts.push({
-            name: listProductOnSale[i].name,
+            id: listOffers[j].id,
             bidder: bidder.name,
             price: listProductOnSale[i].price,
             offer_price: listOffers[j].price,

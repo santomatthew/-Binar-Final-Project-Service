@@ -33,6 +33,11 @@ app.get(
 );
 app.get("/api/v1/listsoldproducts", controller.auth, controller.soldProduct);
 app.get("/api/v1/notification", controller.auth, controller.notification);
+app.put(
+  "/api/v1/updatenotif/:id",
+  controller.auth,
+  controller.updateNotification
+);
 
 // Products
 app.get("/api/v1/products", controller.getProducts);
@@ -52,6 +57,7 @@ app.delete(
 
 // Offer
 app.post("/api/v1/offerproduct/:id", controller.auth, controller.offerProduct);
+app.get("/api/v1/updateoffer/:id", controller.auth, controller.updateOffer);
 
 app.listen(PORT, () => {
   console.log(`Backend is running on port ${PORT}`);
