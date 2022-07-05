@@ -12,13 +12,15 @@ async function getProduct(req, res) {
       where: { is_sold: false },
       order: sequelize.random(),
     });
-    const listPhotos = await Photos.findAll();
 
     const products = [];
 
     for (let i in listProducts) {
       const ownerProduct = await Users.findByPk(listProducts[i].user_id);
       const category = await Categories.findByPk(listProducts[i].category_id);
+      const photo = await Photos.findOne({
+        where: { product_id: listProducts[i].id },
+      });
       let data = {};
       if (category) {
         data = {
@@ -29,7 +31,7 @@ async function getProduct(req, res) {
           description: listProducts[i].description,
           user_name: ownerProduct.name,
           is_sold: listProducts[i].is_sold,
-          photos: [],
+          photo: photo.name,
         };
       } else {
         data = {
@@ -40,15 +42,10 @@ async function getProduct(req, res) {
           description: listProducts[i].description,
           user_name: ownerProduct.name,
           is_sold: listProducts[i].is_sold,
-          photos: [],
+          photo: photo.name,
         };
       }
 
-      for (let j in listPhotos) {
-        if (listPhotos[j].product_id == listProducts[i].id) {
-          data.photos.push(listPhotos[j].name);
-        }
-      }
       products.push(data);
     }
     res.send(products);
