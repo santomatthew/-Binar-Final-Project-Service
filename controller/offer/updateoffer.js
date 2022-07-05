@@ -20,6 +20,7 @@ async function acceptOffer(req, res) {
               id: {
                 [Op.not]: chosenOffer,
               },
+              product_id: product.id,
             },
           });
 

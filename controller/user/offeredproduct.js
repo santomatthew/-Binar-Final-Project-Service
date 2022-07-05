@@ -11,13 +11,13 @@ async function offeredProduct(req, res) {
 
     // List barang yang dijual
     let listProductOnSale = await Products.findAll({
-      where: { user_id: userData.id },
+      where: { user_id: userData.id, is_sold: false },
     });
 
     // array yang akan digunakan untuk mensortir barang yang telah ditawar
     let listInterestedProducts = [];
 
-    let listOffers = await Offers.findAll();
+    let listOffers = await Offers.findAll({ where: { status: null || false } });
 
     for (let i in listProductOnSale) {
       for (let j in listOffers) {
@@ -26,6 +26,7 @@ async function offeredProduct(req, res) {
 
           listInterestedProducts.push({
             id: listOffers[j].id,
+            product_name: listProductOnSale[i].name,
             bidder: bidder.name,
             price: listProductOnSale[i].price,
             offer_price: listOffers[j].price,

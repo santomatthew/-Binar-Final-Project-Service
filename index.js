@@ -58,6 +58,7 @@ app.delete(
 // Offer
 app.post("/api/v1/offerproduct/:id", controller.auth, controller.offerProduct);
 app.get("/api/v1/updateoffer/:id", controller.auth, controller.updateOffer);
+app.put("/api/v1/finishoffer/:id", controller.auth, controller.finishOffer);
 
 app.listen(PORT, () => {
   console.log(`Backend is running on port ${PORT}`);
