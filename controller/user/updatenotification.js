@@ -1,4 +1,4 @@
-const { Notifications, Users } = require("../../models");
+const { Notifications } = require("../../models");
 
 const jwt = require("jsonwebtoken");
 const e = require("express");
