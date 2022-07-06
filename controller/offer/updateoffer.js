@@ -1,4 +1,10 @@
-const { Offers, Users, Products, Sequelize } = require("../../models");
+const {
+  Offers,
+  Users,
+  Products,
+  Notifications,
+  Sequelize,
+} = require("../../models");
 const jwt = require("jsonwebtoken");
 const Op = Sequelize.Op;
 
@@ -32,6 +38,14 @@ async function acceptOffer(req, res) {
               },
             }
           );
+
+          await Notifications.create({
+            title: "Penawaran Produk",
+            user_id: offer.bidder_id,
+            product_id: product.id,
+            offer_id: offer.id,
+            message: "Kamu akan segera dihubungi penjual via whatsapp",
+          });
 
           for (let i in notElectedOffers) {
             await Offers.update(
