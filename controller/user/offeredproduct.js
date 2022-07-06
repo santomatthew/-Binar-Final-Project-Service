@@ -1,8 +1,7 @@
-const { Products } = require("../../models");
-const { Offers } = require("../../models");
-const { Users } = require("../../models");
+const { Products, Offers, Users, Sequelize } = require("../../models");
 
 const jwt = require("jsonwebtoken");
+const Op = Sequelize.Op;
 
 async function offeredProduct(req, res) {
   try {
@@ -17,7 +16,13 @@ async function offeredProduct(req, res) {
     // array yang akan digunakan untuk mensortir barang yang telah ditawar
     let listInterestedProducts = [];
 
-    let listOffers = await Offers.findAll({ where: { status: null || false } });
+    let listOffers = await Offers.findAll({
+      where: {
+        status: {
+          [Op.or]: [null, false],
+        },
+      },
+    });
 
     for (let i in listProductOnSale) {
       for (let j in listOffers) {

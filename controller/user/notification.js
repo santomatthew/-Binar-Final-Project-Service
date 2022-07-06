@@ -47,15 +47,30 @@ async function notification(req, res) {
             };
             listNotification.push(notificationData);
           } else {
-            let notificationData = {
-              title: getNotification[i].title,
-              name: getProduct.name,
-              price: getProduct.price,
-              bid_price: getBid.price,
-              photo: getPhoto.name,
-              date: getNotification[i].createdAt,
-            };
-            listNotification.push(notificationData);
+            const message = getNotification[i].message;
+
+            if (message) {
+              let notificationData = {
+                title: getNotification[i].title,
+                name: getProduct.name,
+                price: getProduct.price,
+                bid_price: getBid.price,
+                photo: getPhoto.name,
+                message: getNotification[i].message,
+                date: getNotification[i].createdAt,
+              };
+              listNotification.push(notificationData);
+            } else {
+              let notificationData = {
+                title: getNotification[i].title,
+                name: getProduct.name,
+                price: getProduct.price,
+                bid_price: getBid.price,
+                photo: getPhoto.name,
+                date: getNotification[i].createdAt,
+              };
+              listNotification.push(notificationData);
+            }
           }
         } else {
           let notificationData = {
