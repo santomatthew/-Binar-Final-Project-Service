@@ -1,12 +1,10 @@
 const { Products, Offers, Users, Sequelize } = require("../../models");
 
-const jwt = require("jsonwebtoken");
 const Op = Sequelize.Op;
 
 async function offeredProduct(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     // List barang yang dijual
     let listProductOnSale = await Products.findAll({

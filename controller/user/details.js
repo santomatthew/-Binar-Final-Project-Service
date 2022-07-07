@@ -1,11 +1,8 @@
 const { Users, Photos } = require("../../models");
 
-const jwt = require("jsonwebtoken");
-
 async function details(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     let checkUser = await Users.findByPk(userData.id);
 

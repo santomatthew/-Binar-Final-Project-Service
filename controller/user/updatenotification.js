@@ -5,8 +5,7 @@ const e = require("express");
 
 async function updateNotification(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     let clickedNotif = req.params.id;
     let notification = await Notifications.findByPk(clickedNotif);

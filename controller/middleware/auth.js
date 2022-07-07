@@ -7,6 +7,7 @@ async function auth(req, res, next) {
     let userData = jwt.verify(header, "s3cr3t");
     let checkUser = await Users.findByPk(userData.id);
     if (checkUser) {
+      req.userData = checkUser;
       next();
       return;
     } else {

@@ -14,48 +14,69 @@ async function offerProduct(req, res) {
       where: { product_id: inputProductId, bidder_id: userData.id },
     });
 
-    if (checkOffer) {
-      res.status(409).json({
-        message:
-          "Anda sudah menawar produk ini, silahkan menunggu konfirmasi penjual ",
-      });
-    } else {
-      let product = await Products.findByPk(inputProductId);
+    let product = await Products.findByPk(inputProductId);
 
-      if (inputPrice) {
-        if (inputPrice < product.price) {
-          let offer = await Offers.create({
-            product_id: product.id,
-            price: inputPrice,
-            bidder_id: userData.id,
-          });
+    if (product.is_sold == false) {
+      if (checkOffer) {
+        res.status(409).json({
+          message:
+            "Anda sudah menawar produk ini, silahkan menunggu konfirmasi penjual ",
+        });
+      } else {
+        if (inputPrice) {
+          if (inputPrice < product.price) {
+            let checkOfferStatus = await Offers.findOne({
+              where: { product_id: product.id, status: true },
+            });
 
-          for (let i = 0; i <= 1; i++) {
-            let id = userData.id;
-            if (i % 2 == 1) {
-              let owner = await Users.findByPk(product.user_id);
-              id = owner.id;
+            let offer;
+
+            if (checkOfferStatus) {
+              offer = await Offers.create({
+                product_id: product.id,
+                price: inputPrice,
+                bidder_id: userData.id,
+                status: false,
+              });
+            } else {
+              offer = await Offers.create({
+                product_id: product.id,
+                price: inputPrice,
+                bidder_id: userData.id,
+              });
             }
 
-            await Notifications.create({
-              user_id: id,
-              product_id: product.id,
-              offer_id: offer.id,
-              title: "Penawaran produk",
-            });
-          }
+            for (let i = 0; i <= 1; i++) {
+              let id = userData.id;
+              if (i % 2 == 1) {
+                let owner = await Users.findByPk(product.user_id);
+                id = owner.id;
+              }
 
-          res.status(201).json({
-            message: `Tawaran harga pada produk ${product.name} berhasil dibuat. Silahkan menunggu respon dari penjual`,
-          });
+              await Notifications.create({
+                user_id: id,
+                product_id: product.id,
+                offer_id: offer.id,
+                title: "Penawaran produk",
+              });
+            }
+
+            res.status(201).json({
+              message: `Tawaran harga pada produk ${product.name} berhasil dibuat. Silahkan menunggu respon dari penjual`,
+            });
+          } else {
+            res.send(
+              "Harga tawaran anda tidak bisa lebih besar daripada harga asli"
+            );
+          }
         } else {
-          res.send(
-            "Harga tawaran anda tidak bisa lebih besar daripada harga asli"
-          );
+          res.send("Silahkan isi harga penawaran");
         }
-      } else {
-        res.send("Silahkan isi harga penawaran");
       }
+    } else {
+      res.json({
+        message: `Produk tidak ada`,
+      });
     }
   } catch (error) {
     res.send(error);

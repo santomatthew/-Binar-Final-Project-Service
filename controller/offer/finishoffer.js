@@ -1,4 +1,4 @@
-const { Offers, Notifications, Products } = require("../../models");
+const { Offers, Notifications, Products, Users } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 async function finishOffer(req, res) {
@@ -42,6 +42,7 @@ async function finishOffer(req, res) {
       }
     } else {
       let product = await Products.findByPk(finalOffer.product_id);
+      let bidder = await Users.findByPk(finalOffer.bidder_id);
       await Offers.destroy({ where: { id: finalOffer.id } });
       let offers = await Offers.findAll({
         where: { product_id: product.id },
@@ -58,7 +59,7 @@ async function finishOffer(req, res) {
       }
 
       res.json({
-        message: `Transaksi telah dibatalkan`,
+        message: `Transaksi dengan ${bidder.name} telah dibatalkan`,
       });
     }
   } catch (error) {

@@ -5,12 +5,10 @@ const {
   Photos,
   Notifications,
 } = require("../../models");
-const jwt = require("jsonwebtoken");
 
 async function notification(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     let user = await Users.findByPk(userData.id);
 
