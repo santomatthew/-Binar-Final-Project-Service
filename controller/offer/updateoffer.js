@@ -5,13 +5,12 @@ const {
   Notifications,
   Sequelize,
 } = require("../../models");
-const jwt = require("jsonwebtoken");
+
 const Op = Sequelize.Op;
 
 async function acceptOffer(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     let chosenOffer = req.params.id;
     let option = req.body.value;

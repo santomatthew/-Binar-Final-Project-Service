@@ -1,11 +1,8 @@
 const { Products, Offers, Users, Notifications } = require("../../models");
 
-const jwt = require("jsonwebtoken");
-
 async function offerProduct(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     let inputPrice = req.body.price;
     let inputProductId = req.params.id;
