@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 
 async function finishOffer(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     let option = req.body.value;
     const offer = req.params.id;
