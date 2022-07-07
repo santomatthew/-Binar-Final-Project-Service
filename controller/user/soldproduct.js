@@ -1,10 +1,8 @@
 const { Products } = require("../../models");
-const jwt = require("jsonwebtoken");
 
 async function soldProduct(req, res) {
   try {
-    let header = req.headers.authorization.split("Bearer ")[1];
-    let userData = jwt.verify(header, "s3cr3t");
+    let userData = req.userData;
 
     const listProduct = await Products.findAll({
       where: { user_id: userData.id, is_sold: true },
