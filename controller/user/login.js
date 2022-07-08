@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 async function login(req, res) {
   try {
-    let inputEmail = req.body.email;
+    let inputEmail = req.body.email.toLowerCase();
     let inputPassword = req.body.password;
 
     let validateUser = await Users.findOne({ where: { email: inputEmail } });

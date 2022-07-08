@@ -12,7 +12,7 @@ async function register(req, res) {
     if (!validateEmail) {
       await Users.create({
         name: inputName,
-        email: inputEmail,
+        email: inputEmail.toLowerCase(),
         password: await encryptPassword(inputPassword),
       });
       res.status(201).send(`Akun dengan email ${inputEmail} berhasil dibuat`);
