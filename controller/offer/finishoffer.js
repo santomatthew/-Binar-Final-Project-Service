@@ -16,7 +16,7 @@ async function finishOffer(req, res) {
           finalOffer.status == true &&
           product.is_sold == false
         ) {
-          let soldProduct = await Products.update(
+          await Products.update(
             { is_sold: true },
             {
               where: {
@@ -27,7 +27,8 @@ async function finishOffer(req, res) {
 
           await Notifications.create({
             user_id: userData.id,
-            product_id: soldProduct.id,
+            product_id: product.id,
+            offer_id: finalOffer.id,
             title: "Berhasil terjual",
           });
 
