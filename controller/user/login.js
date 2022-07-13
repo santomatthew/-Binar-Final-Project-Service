@@ -4,10 +4,12 @@ const jwt = require("jsonwebtoken");
 
 async function login(req, res) {
   try {
-    let inputEmail = req.body.email.toLowerCase();
+    let inputEmail = req.body.email;
     let inputPassword = req.body.password;
 
-    let validateUser = await Users.findOne({ where: { email: inputEmail } });
+    let validateUser = await Users.findOne({
+      where: { email: inputEmail.toLowerCase() },
+    });
 
     if (validateUser) {
       if (inputPassword) {
@@ -26,16 +28,16 @@ async function login(req, res) {
             access_token: token,
           });
         } else {
-          res.send("Username atau password salah");
+          res.status(401).json({ message: "Username atau password salah" });
         }
       } else {
-        res.send("Silahkan mengisi password");
+        res.status(401).json({ message: "Silahkan mengisi password" });
       }
     } else {
-      res.status(401).send("Username atau password salah");
+      res.status(401).json({ message: "Username atau password salah" });
     }
   } catch (error) {
-    res.send(error);
+    res.status(401).json({ error: error.message });
   }
 }
 

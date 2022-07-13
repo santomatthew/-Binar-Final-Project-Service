@@ -3,6 +3,8 @@ const config = new URL(
     "postgres://postgres:12345678@127.0.0.1:5432/final_project"
 );
 
+const path = require("path");
+
 const {
   DB_USER = config.username,
   DB_PASSWORD = config.password,
@@ -11,6 +13,7 @@ const {
   DB_PORT = "5432",
 } = process.env;
 
+// console.log(process.env);
 module.exports = {
   development: {
     username: DB_USER,
@@ -21,11 +24,14 @@ module.exports = {
     dialect: "postgres",
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
-    host: "127.0.0.1",
-    dialect: "postgres",
+    username: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    host: DB_HOST,
+    port: DB_PORT,
+    storage: path.resolve(__dirname, "../node_modules/test.sqlite"),
+    dialect: "sqlite",
+    logging: false,
   },
   production: {
     use_env_variable: `DATABASE_URL`,

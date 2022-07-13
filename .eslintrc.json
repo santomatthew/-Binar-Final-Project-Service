@@ -16,4 +16,6 @@
         "import/no-dynamic-require": "off",
         "global-require": "off"
     }
+    ,
+    "ignorePatterns": ["*.spec.js", "*.test.js"]
 }
