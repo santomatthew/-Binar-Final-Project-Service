@@ -29,4 +29,7 @@ module.exports = {
   auth: require("./middleware/auth"),
   uploadPhoto: require("./middleware/upload"),
   postPhoto: require("./middleware/postphoto"),
+
+  // Success
+  success: require("./success/success"),
 };

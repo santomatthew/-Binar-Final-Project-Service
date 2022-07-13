@@ -1,6 +1,7 @@
 stages:
   - cleancode
   - deploy
+  - unit testing
 
 Deploy to Heroku:
   stage: deploy
@@ -12,3 +13,11 @@ Deploy to Heroku:
     - master
   script:
     - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+
+test:
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  stage: unit testing
+  image: node:latest
+  script:
+    - yarn install
+    - yarn test

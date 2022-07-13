@@ -24,10 +24,16 @@
     "migrate": "sequelize-cli db:migrate",
     "sequelize-cli": "sequelize-cli",
     "lint": "eslint ./ --resolve-plugins-relative-to .",
-    "lint:fix": "eslint --fix ./**/*.js"
+    "lint:fix": "eslint --fix ./**/*.js",
+    "jest": "jest",
+    "test": "jest --coverage ",
+    "pretest":"sequelize-cli db:migrate --env test && sequelize-cli db:seed:all --env test"
   },
   "devDependencies": {
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.2"
+    "eslint-plugin-import": "^2.25.2",
+    "jest": "^28.1.2",
+    "sqlite3": "^5.0.8",
+    "supertest": "^6.2.4"
   }
 }
