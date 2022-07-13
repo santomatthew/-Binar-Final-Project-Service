@@ -3,6 +3,14 @@ stages:
   - deploy
   - unit testing
 
+test:
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  stage: unit testing
+  image: node:latest
+  script:
+    - yarn install
+    - yarn test
+
 Deploy to Heroku:
   stage: deploy
   image: ruby:latest
@@ -13,11 +21,3 @@ Deploy to Heroku:
     - master
   script:
     - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
-
-test:
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  stage: unit testing
-  image: node:latest
-  script:
-    - yarn install
-    - yarn test

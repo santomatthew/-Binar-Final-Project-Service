@@ -6,6 +6,9 @@ async function login(req, res) {
   try {
     let inputEmail = req.body.email;
     let inputPassword = req.body.password;
+    if (!inputEmail) {
+      throw new Error("Email wajib diisi");
+    }
 
     let validateUser = await Users.findOne({
       where: { email: inputEmail.toLowerCase() },
@@ -37,7 +40,7 @@ async function login(req, res) {
       res.status(401).json({ message: "Username atau password salah" });
     }
   } catch (error) {
-    res.status(401).json({ error: error.message });
+    res.status(401).json({ message: error.message });
   }
 }
 
