@@ -9,17 +9,21 @@ app.use(express.json());
 app.get("/api/v1/product/:id", controller.getProductById);
 const { Products } = require("../../../models");
 
-const getAllProducts = Products.findAll();
+let getAllProducts = [];
 
 describe("Get Product by id", () => {
+  beforeAll(async () => {
+    getAllProducts = await Products.findAll();
+  });
+
   describe("Get product by id Success", () => {
     it("Get Products Success should return 200 and list of products", (done) => {
       request(app)
-        .get("/api/v1/product/1")
+        .get(`/api/v1/product/${getAllProducts[0].id}`)
         .set("Content-Type", "application/json")
         .expect(200)
         .then((res) => {
-          expect(res.body).toBeDefined();
+          expect(res.body.product).toBeDefined();
           done();
         })
         .catch(done);
@@ -29,7 +33,7 @@ describe("Get Product by id", () => {
   describe("Get product by id not success", () => {
     it("Get Products not success should return 404 not found and res.body.message=Produk tidak ditemukan", (done) => {
       request(app)
-        .get(`/api/v1/product/${getAllProducts.length + 1}`)
+        .get(`/api/v1/product/0`)
         .set("Content-Type", "application/json")
         .expect(404)
         .then((res) => {

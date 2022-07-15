@@ -15,8 +15,8 @@ describe("Get Products", () => {
       .set("Content-Type", "application/json")
       .expect(200)
       .then((res) => {
-        // console.log(res.body.products);
-        expect(res.body).toBeDefined();
+        // console.log(res.body);
+        expect(res.body.products).toBeDefined();
         done();
       })
       .catch(done);

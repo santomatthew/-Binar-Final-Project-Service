@@ -28,7 +28,7 @@ async function getProductById(req, res) {
       for (let j in listPhotos) {
         data.photos.push(listPhotos[j].name);
       }
-      res.status(200).send(data);
+      res.status(200).json({ product: data });
     } else {
       throw new Error("Produk tidak ditemukan");
     }
