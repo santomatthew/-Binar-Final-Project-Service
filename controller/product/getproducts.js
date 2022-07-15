@@ -57,7 +57,7 @@ async function getProduct(req, res) {
 
       products.push(data);
     }
-    res.send(products);
+    res.status(200).json({ products: products });
   } catch (error) {
     res.send(error);
   }

@@ -8,6 +8,7 @@ module.exports = {
   details: require("./user/details"),
   notification: require("./user/notification"),
   updateNotification: require("./user/updatenotification"),
+  whoAmI: require("./user/whoami"),
 
   //   Encrypt & Decrypt
   encryptPassword: require("./encrypt-decrypt/encrypt"),

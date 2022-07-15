@@ -58,5 +58,25 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete("photos", [
+      {
+        name: "https://www.ikea.co.id/in/produk/dekorasi/jam/degade-art-40490539",
+      },
+      {
+        name: "https://www.ikea.co.id/in/produk/dekorasi/jam/dekad-art-50391906",
+      },
+      {
+        name: "https://www.tokopedia.com/bijaksa-1/new-jam-beker-besi-jam-weker-jam-alarm-jam-beker-besi-angka",
+      },
+      {
+        name: "https://shopee.co.id/Jam-Tangan-Anak-Smartwatch-Imoo-Smartwatch-Imoo-Jam-Tangan-Imoo-i.148306386.6706601905",
+      },
+      {
+        name: "https://shopee.co.id/IMOO-Y1-Watch-Phone-Smartwatch-i.16396297.2014407251",
+      },
+      {
+        name: "https://www.blibli.com/p/imoo-z5-watch-phone-smartwatch-original/ps--GAD-60042-00064",
+      },
+    ]);
   },
 };
