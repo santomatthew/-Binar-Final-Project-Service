@@ -21,34 +21,43 @@ async function getProduct(req, res) {
       const photo = await Photos.findOne({
         where: { product_id: listProducts[i].id },
       });
-      let data = {};
-      if (category) {
-        data = {
-          id: listProducts[i].id,
-          name: listProducts[i].name,
-          price: listProducts[i].price,
-          category: category.name,
-          description: listProducts[i].description,
-          user_name: ownerProduct.name,
-          is_sold: listProducts[i].is_sold,
-          photo: photo.name,
-        };
-      } else {
-        data = {
-          id: listProducts[i].id,
-          name: listProducts[i].name,
-          price: listProducts[i].price,
-          category: "Tidak ada kategori",
-          description: listProducts[i].description,
-          user_name: ownerProduct.name,
-          is_sold: listProducts[i].is_sold,
-          photo: photo.name,
-        };
-      }
+      let data = {
+        id: listProducts[i].id,
+        name: listProducts[i].name,
+        price: listProducts[i].price,
+        category: category ? category.name : "Tidak ada kategori",
+        description: listProducts[i].description,
+        user_name: ownerProduct.name,
+        is_sold: listProducts[i].is_sold,
+        photo: photo.name,
+      };
+      // if (category) {
+      //   data = {
+      //     id: listProducts[i].id,
+      //     name: listProducts[i].name,
+      //     price: listProducts[i].price,
+      //     category: category.name,
+      //     description: listProducts[i].description,
+      //     user_name: ownerProduct.name,
+      //     is_sold: listProducts[i].is_sold,
+      //     photo: photo.name,
+      //   };
+      // } else {
+      //   data = {
+      //     id: listProducts[i].id,
+      //     name: listProducts[i].name,
+      //     price: listProducts[i].price,
+      //     category: "Tidak ada kategori",
+      //     description: listProducts[i].description,
+      //     user_name: ownerProduct.name,
+      //     is_sold: listProducts[i].is_sold,
+      //     photo: photo.name,
+      //   };
+      // }
 
       products.push(data);
     }
-    res.send(products);
+    res.status(200).json({ products: products });
   } catch (error) {
     res.send(error);
   }

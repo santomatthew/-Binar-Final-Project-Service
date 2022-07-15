@@ -88,5 +88,21 @@ describe("Login POST /api/v1/login", () => {
         })
         .catch(done);
     });
+
+    it("Email empty should return 401 Unauthorized and return res.body.error = Email wajib diisi", (done) => {
+      request(app)
+        .post("/api/v1/login")
+        .set("Content-Type", "application/json")
+        .send({
+          email: null,
+          password: invalidEmail.password,
+        })
+        .expect(401)
+        .then((res) => {
+          expect(res.body.message).toBe("Email wajib diisi");
+          done();
+        })
+        .catch(done);
+    });
   });
 });

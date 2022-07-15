@@ -7,6 +7,10 @@ async function register(req, res) {
     const inputEmail = req.body.email;
     const inputPassword = req.body.password;
 
+    if (!inputName || !inputEmail || !inputPassword) {
+      throw new Error("Data yang diisi harus lengkap");
+    }
+
     let validateEmail = await Users.findOne({ where: { email: inputEmail } });
 
     if (!validateEmail) {
@@ -15,12 +19,14 @@ async function register(req, res) {
         email: inputEmail.toLowerCase(),
         password: await encryptPassword(inputPassword),
       });
-      res.status(201).send(`Akun dengan email ${inputEmail} berhasil dibuat`);
+      res
+        .status(201)
+        .json({ message: `Akun dengan email ${inputEmail} berhasil dibuat` });
     } else {
-      res.status(409).send("Email telah digunakan");
+      res.status(409).json({ message: "Email telah digunakan" });
     }
   } catch (error) {
-    res.send(error);
+    res.status(401).json({ message: error.message });
   }
 }
 
