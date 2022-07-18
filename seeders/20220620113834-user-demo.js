@@ -21,6 +21,20 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        name: "Siti",
+        email: "siti@gmail.com",
+        password: await encryptPassword("12345678"),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "Kartika",
+        email: "kartika@gmail.com",
+        password: await encryptPassword("12345678"),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 

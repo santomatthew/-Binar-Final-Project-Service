@@ -26,6 +26,34 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        user_id: 2,
+        product_id: 3,
+        title: "Berhasil diterbitkan",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 2,
+        product_id: 4,
+        title: "Berhasil diterbitkan",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 3,
+        product_id: 5,
+        title: "Berhasil diterbitkan",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 3,
+        product_id: 6,
+        title: "Berhasil diterbitkan",
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 
