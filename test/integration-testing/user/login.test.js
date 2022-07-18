@@ -1,6 +1,6 @@
 const express = require("express");
 const request = require("supertest");
-const controller = require("../../controller");
+const controller = require("../../../controller");
 
 const app = express();
 // const router = require("../../router");
@@ -51,7 +51,7 @@ describe("Login POST /api/v1/login", () => {
         })
         .expect(401)
         .then((res) => {
-          expect(res.body.message).toBe("Username atau password salah");
+          expect(res.body.message).toBe("Email atau password salah");
           done();
         })
         .catch(done);
@@ -83,7 +83,7 @@ describe("Login POST /api/v1/login", () => {
         })
         .expect(401)
         .then((res) => {
-          expect(res.body.message).toBe("Username atau password salah");
+          expect(res.body.message).toBe("Email atau password salah");
           done();
         })
         .catch(done);
