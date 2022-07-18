@@ -8,7 +8,7 @@ jest.setTimeout(20000);
 app.use(express.json());
 app.get("/api/v1/products", controller.getProducts);
 
-describe("Get Products", () => {
+describe("Get Products method", () => {
   it("Get Products Success should return 200 and list of products", (done) => {
     request(app)
       .get("/api/v1/products")

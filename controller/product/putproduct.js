@@ -27,7 +27,7 @@ async function putProduct(req, res) {
             product_id: inputId,
             title: "Berhasil di update",
           });
-          res.json({ message: `Update product ${req.params.id} berhasil` });
+          res.status(200).json({ message: `Update product berhasil` });
         } else {
           res.json({ message: "Update product gagal" });
         }
@@ -40,7 +40,7 @@ async function putProduct(req, res) {
       });
     }
   } catch (error) {
-    res.send(error);
+    res.json({ message: error.message });
   }
 }
 module.exports = putProduct;

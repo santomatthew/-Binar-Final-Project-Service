@@ -11,7 +11,7 @@ const { Products } = require("../../../models");
 
 let getAllProducts = [];
 
-describe("Get Product by id", () => {
+describe("Get Product by id method", () => {
   beforeAll(async () => {
     getAllProducts = await Products.findAll();
   });
