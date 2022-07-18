@@ -1,6 +1,6 @@
 const express = require("express");
 const request = require("supertest");
-const controller = require("../../controller");
+const controller = require("../../../controller");
 
 const app = express();
 // const router = require("../../router");

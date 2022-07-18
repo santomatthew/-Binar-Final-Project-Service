@@ -1,7 +1,7 @@
 const express = require("express");
 const request = require("supertest");
-const controller = require("../../controller");
-const { Users } = require("../../models");
+const controller = require("../../../controller");
+const { Users } = require("../../../models");
 
 const app = express();
 
