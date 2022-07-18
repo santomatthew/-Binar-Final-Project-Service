@@ -83,11 +83,11 @@ async function notification(req, res) {
       }
 
       if (listNotification.length > 0) {
-        res.send(
-          listNotification.sort(function (a, b) {
+        res.status(200).json({
+          notifications: listNotification.sort(function (a, b) {
             return new Date(b.date) - new Date(a.date);
-          })
-        );
+          }),
+        });
       } else {
         res.json({ message: "Anda tidak memiliki notifikasi" });
       }
