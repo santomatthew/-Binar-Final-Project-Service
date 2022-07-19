@@ -59,7 +59,7 @@ async function offerProduct(req, res) {
             }
 
             res.status(201).json({
-              message: `Tawaran harga pada produk ${product.name} berhasil dibuat. Silahkan menunggu respon dari penjual`,
+              message: `Tawaran harga pada produk berhasil dibuat. Silahkan menunggu respon dari penjual`,
             });
           } else {
             res.send(
