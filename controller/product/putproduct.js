@@ -7,8 +7,8 @@ async function putProduct(req, res) {
 
     const product = await Products.findByPk(inputId);
 
-    if (product.user_id == userData.id) {
-      if (product) {
+    if (product) {
+      if (product.user_id == userData.id) {
         let productData = {
           name: product.name,
           price: product.price,
@@ -28,16 +28,14 @@ async function putProduct(req, res) {
             title: "Berhasil di update",
           });
           res.status(200).json({ message: `Update product berhasil` });
-        } else {
-          res.json({ message: "Update product gagal" });
         }
       } else {
-        res.json({ message: "Produk yang ingin di update tidak ada" });
+        res.status(403).json({
+          message: "Anda tidak bisa mengupdate product yang bukan milik anda",
+        });
       }
     } else {
-      res.status(403).json({
-        message: "Anda tidak bisa mengupdate product yang bukan milik anda",
-      });
+      res.json({ message: "Produk yang ingin di update tidak ada" });
     }
   } catch (error) {
     res.json({ message: error.message });

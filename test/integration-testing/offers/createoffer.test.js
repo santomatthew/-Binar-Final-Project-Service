@@ -2,7 +2,7 @@ const express = require("express");
 const { Op } = require("sequelize");
 const request = require("supertest");
 const controller = require("../../../controller");
-const { Products } = require("../../../models");
+const { Products, Offers } = require("../../../models");
 
 const app = express();
 
@@ -39,6 +39,11 @@ describe("Post Offer Product method", () => {
 
     findProduct = findNotOwnedProduct;
   });
+
+  afterAll(async () => {
+    await Offers.destroy({ where: { bidder_id: 1 } });
+  });
+
   describe("Post offer success", () => {
     it("Post offer success should return status code 201 and response Tawaran harga pada produk berhasil dibuat. Silahkan menunggu respon dari penjual", (done) => {
       request(app)
@@ -47,15 +52,31 @@ describe("Post Offer Product method", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({ price: findProduct.price / 2 })
         .expect(201)
-        .then((res) => {
+        .then(async (res) => {
           expect(res.body.message).toBe(
             "Tawaran harga pada produk berhasil dibuat. Silahkan menunggu respon dari penjual"
+          );
+          done();
+          await Offers.destroy({ where: { bidder_id: 1 } });
+        })
+        .catch(done);
+    });
+  });
+
+  describe("Post offer failed", () => {
+    it("Post offer price is higher than the real price should return error", (done) => {
+      request(app)
+        .post(`/api/v1/offerproduct/${findProduct.id}`)
+        .set("Content-Type", "application/json")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ price: findProduct.price + 1 })
+        .then((res) => {
+          expect(res.body.message).toBe(
+            "Harga tawaran anda tidak bisa lebih besar daripada harga asli"
           );
           done();
         })
         .catch(done);
     });
   });
-
-  describe("Post offer failed", () => {});
 });

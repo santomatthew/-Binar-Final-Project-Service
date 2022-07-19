@@ -62,12 +62,13 @@ async function offerProduct(req, res) {
               message: `Tawaran harga pada produk berhasil dibuat. Silahkan menunggu respon dari penjual`,
             });
           } else {
-            res.send(
-              "Harga tawaran anda tidak bisa lebih besar daripada harga asli"
-            );
+            res.json({
+              message:
+                "Harga tawaran anda tidak bisa lebih besar daripada harga asli",
+            });
           }
         } else {
-          res.send("Silahkan isi harga penawaran");
+          res.json({ message: "Silahkan isi harga penawaran" });
         }
       }
     } else {
