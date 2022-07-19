@@ -67,8 +67,8 @@ describe("Put Products method", () => {
         .catch(done);
     });
   });
-  describe("Update another user product should return error 403 and response Anda tidak bisa mengupdate product yang bukan milik anda", () => {
-    it("Update product fail", (done) => {
+  describe("Update product Fail", () => {
+    it("Update another user product should return error 403 and response Anda tidak bisa mengupdate product yang bukan milik anda", (done) => {
       request(app)
         .put(`/api/v1/updateproduct/${findNotOwnedProduct.id}`)
         .set("Content-Type", "application/json")
@@ -83,6 +83,26 @@ describe("Put Products method", () => {
         .then((res) => {
           expect(res.body.message).toBe(
             "Anda tidak bisa mengupdate product yang bukan milik anda"
+          );
+          done();
+        })
+        .catch(done);
+    });
+
+    it("Update not found product should return response Produk yang ingin di update tidak ada", (done) => {
+      request(app)
+        .put(`/api/v1/updateproduct/${0}`)
+        .set("Content-Type", "application/json")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          name: "Jam beker tertua di dunia",
+          price: 80000,
+          category_id: 4,
+          description: "Ini adalah jam Beker legenda",
+        })
+        .then((res) => {
+          expect(res.body.message).toBe(
+            "Produk yang ingin di update tidak ada"
           );
           done();
         })
