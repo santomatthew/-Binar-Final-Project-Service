@@ -77,7 +77,7 @@ async function offerProduct(req, res) {
       });
     }
   } catch (error) {
-    res.send(error);
+    res.json({ message: error.message });
   }
 }
 
