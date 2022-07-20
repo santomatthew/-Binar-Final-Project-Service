@@ -9,7 +9,7 @@ async function soldProduct(req, res) {
     });
 
     if (listProduct.length > 0) {
-      res.status(200).send(listProduct);
+      res.status(200).json({ products: listProduct });
     } else {
       res.json({ message: "Produk anda belum ada yang terjual" });
     }
