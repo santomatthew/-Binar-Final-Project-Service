@@ -71,7 +71,7 @@ describe("Create New Product Method", () => {
         })
         .expect(200)
         .then((res) => {
-          expect(res.body.message).toBe(`Tidak ada boleh ada data yang kosong`);
+          expect(res.body.message).toBe(`Tidak boleh ada data yang kosong`);
           done();
         })
         .catch(done);

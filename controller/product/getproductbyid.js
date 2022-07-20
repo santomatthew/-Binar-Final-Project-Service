@@ -18,6 +18,7 @@ async function getProductById(req, res) {
         category: category ? category.name : "Tidak ada kategori",
         description: product.description,
         user_name: ownerProduct.name,
+        user_id: ownerProduct.id,
         is_sold: product.is_sold,
         photos: [],
       };
