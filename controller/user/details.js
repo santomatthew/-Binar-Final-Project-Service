@@ -37,7 +37,7 @@ async function details(req, res) {
       });
     }
   } catch (error) {
-    res.send(error);
+    res.json({ message: error.message });
   }
 }
 
