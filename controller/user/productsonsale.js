@@ -32,13 +32,11 @@ async function productsOnSale(req, res) {
         }
         res.status(200).json({ products: listProducts });
       } else {
-        res.send("Kamu belum memiliki barang yang dijual");
+        res.json({ message: "Kamu belum memiliki barang yang dijual" });
       }
-    } else {
-      res.send("errors");
     }
   } catch (error) {
-    res.send(error);
+    res.json({ message: error.message });
   }
 }
 

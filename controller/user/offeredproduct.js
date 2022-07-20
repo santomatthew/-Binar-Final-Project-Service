@@ -39,9 +39,9 @@ async function offeredProduct(req, res) {
     }
 
     if (listInterestedProducts.length > 0) {
-      res.send(listInterestedProducts);
+      res.json({ products: listInterestedProducts });
     } else {
-      res.send("Produk anda belum ada yang minat");
+      res.json({ message: "Produk anda belum ada yang minat" });
     }
   } catch (error) {
     res.send(error);
