@@ -19,7 +19,7 @@ async function postProduct(req, res) {
       !inputData.description ||
       !inputPhoto
     ) {
-      throw new Error("Tidak ada boleh ada data yang kosong");
+      throw new Error("Tidak boleh ada data yang kosong");
     }
 
     const newProduct = await Products.create(inputData);
