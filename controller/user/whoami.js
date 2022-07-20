@@ -6,14 +6,14 @@ async function whoAmI(req, res) {
 
     let person = await Users.findByPk(userData.id);
 
-    let photo = await Photos.findOne(person.photo_id);
+    let photo = await Photos.findOne({ where: { id: person.photo_id } });
     res.status(200).json({
       user_data: {
         id: person.id,
         name: person.name,
         city: person.city,
         address: person.address,
-        photo: photo.name,
+        photo: photo ? photo.name : null,
         phone_number: person.phone_number,
       },
     });
