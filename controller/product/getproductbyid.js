@@ -11,6 +11,7 @@ async function getProductById(req, res) {
     if (product) {
       const ownerProduct = await Users.findByPk(product.user_id);
       const category = await Categories.findByPk(product.category_id);
+      const photo = await Photos.findByPk(ownerProduct.photo_id);
       let data = {
         id: product.id,
         name: product.name,
@@ -18,8 +19,12 @@ async function getProductById(req, res) {
         category: category ? category.name : "Tidak ada kategori",
         description: product.description,
         user_name: ownerProduct.name,
+        city: ownerProduct.city,
+        owern_photo: photo ? photo.name : null,
         user_id: ownerProduct.id,
+
         is_sold: product.is_sold,
+
         photos: [],
       };
 
