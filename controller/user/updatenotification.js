@@ -1,8 +1,5 @@
 const { Notifications } = require("../../models");
 
-const jwt = require("jsonwebtoken");
-const e = require("express");
-
 async function updateNotification(req, res) {
   try {
     let userData = req.userData;
