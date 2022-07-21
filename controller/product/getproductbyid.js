@@ -20,7 +20,7 @@ async function getProductById(req, res) {
         description: product.description,
         user_name: ownerProduct.name,
         city: ownerProduct.city,
-        owern_photo: photo ? photo.name : null,
+        owner_photo: photo ? photo.name : null,
         user_id: ownerProduct.id,
 
         is_sold: product.is_sold,
