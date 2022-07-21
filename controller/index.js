@@ -9,6 +9,7 @@ module.exports = {
   notification: require("./user/notification"),
   updateNotification: require("./user/updatenotification"),
   whoAmI: require("./user/whoami"),
+  userOffer: require("./user/useroffer"),
 
   //   Encrypt & Decrypt
   encryptPassword: require("./encrypt-decrypt/encrypt"),

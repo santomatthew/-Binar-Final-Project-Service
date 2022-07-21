@@ -36,6 +36,7 @@ function apply(app) {
     controller.updateNotification
   );
   app.get("/api/v1/whoami", controller.auth, controller.whoAmI);
+  app.get("/api/v1/useroffer/:id", controller.auth, controller.userOffer);
 
   // Products
   app.get("/api/v1/products", controller.getProducts);
