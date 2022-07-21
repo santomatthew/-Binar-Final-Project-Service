@@ -62,6 +62,7 @@ function apply(app) {
   );
   app.put("/api/v1/updateoffer/:id", controller.auth, controller.updateOffer);
   app.put("/api/v1/finishoffer/:id", controller.auth, controller.finishOffer);
+  app.get("/api/v1/checkoffer/:id", controller.auth, controller.checkOffer);
 
   return app;
 }
