@@ -1,4 +1,4 @@
-const { Products, Offers, Users, Sequelize } = require("../../models");
+const { Products, Offers, Users, Sequelize, Photos } = require("../../models");
 
 const Op = Sequelize.Op;
 
@@ -26,11 +26,15 @@ async function offeredProduct(req, res) {
       for (let j in listOffers) {
         if (listOffers[j].product_id == listProductOnSale[i].id) {
           const bidder = await Users.findByPk(listOffers[j].bidder_id);
+          const photo = await Photos.findOne({
+            where: { product_id: listProductOnSale[i].id },
+          });
 
           listInterestedProducts.push({
             id: listOffers[j].id,
             product_name: listProductOnSale[i].name,
             bidder: bidder.name,
+            photo: photo ? photo.name : null,
             price: listProductOnSale[i].price,
             offer_price: listOffers[j].price,
           });
