@@ -25,6 +25,7 @@ async function userOffer(req, res) {
     let bidder = {
       name: bidderData.name,
       city: bidderData.city,
+      phone_number: bidderData.phone_number,
       photo: bidderPhoto ? bidderPhoto.name : null,
     };
 
