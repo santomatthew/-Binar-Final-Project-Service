@@ -40,7 +40,7 @@ async function userOffer(req, res) {
           offer_id: findOffers[i].id,
         });
         const productPhoto = await Photos.findOne({
-          where: { product_id: notification.product_id },
+          where: { product_id: findProduct.id },
         });
 
         listOffered.push({
