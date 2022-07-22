@@ -44,6 +44,7 @@ async function userOffer(req, res) {
         });
 
         listOffered.push({
+          id: findOffers[i].id,
           title: notification.title,
           name: findProduct.name,
           price: findProduct.price,
