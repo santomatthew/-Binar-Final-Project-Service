@@ -1,4 +1,4 @@
-const { Products } = require("../../models");
+const { Products, Photos } = require("../../models");
 
 async function soldProduct(req, res) {
   try {
@@ -9,7 +9,21 @@ async function soldProduct(req, res) {
     });
 
     if (listProduct.length > 0) {
-      res.status(200).json({ products: listProduct });
+      let products = [];
+      for (let i in listProduct) {
+        const photo = await Photos.findOne({
+          where: { product_id: listProduct[i].id },
+        });
+
+        products.push({
+          id: listProduct[i].id,
+          name: listProduct[i].name,
+          price: listProduct[i].price,
+          photo: photo ? photo.name : "",
+        });
+      }
+
+      res.status(200).json({ products: products });
     } else {
       res.json({ message: "Produk anda belum ada yang terjual" });
     }
