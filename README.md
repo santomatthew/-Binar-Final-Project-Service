@@ -11,18 +11,27 @@ Members 👨‍👧‍👧 :
 
 ## 🚀Features
 
-- User
-
 ```
 ✔️Login (with Token)
 ✔️Register
 ✔️Post Product (with Token)
+✔️Put User Data (with Token)
 ✔️Get Product
 ✔️Put Product (with Token)
 ✔️Delete Product (with Token)
-✔️Offer Product (with Token)
+✔️Post Offer Product (with Token)
+✔️Put Offer (Tolak/Terima tawaran) (with Token)
+✔️Put Offer (Berhasil terjual / Batalkan transaksi) (with Token)
 ✔️Get List Offered Product (with Token)
+✔️Get List Product On Sale (with Token)
+✔️Get List Offer by User (with Token)
 ✔️Get List Sold Product (with Token)
+✔️Get List Notification (with Token)
+✔️Put Notification (If notification clicked) (with Token)
+✔️Get Who Am I (with Token)
+✔️Upload Photo Products & User (with Token)
+✔️Get Check Offer (with Token)
+✔️Get Who Am I (with Token)
 ⏳ Forgot Password
 ⏳ OAuth
 ```
@@ -46,3 +55,7 @@ const endpoint = "https://secondhand-kel1.herokuapp.com";
 | sequelize     | ^6.19.0       | https://sequelize.org/                                  |
 | sequelize-cli | ^6.4.1        | https://yarnpkg.com/package/sequelize-cli               |
 | multer        | ^^1.4.5-lts.1 | https://www.npmjs.com/package/multer                    |
+
+## 📌Entity Relationship Diagram
+
+<img src="erd.png">
