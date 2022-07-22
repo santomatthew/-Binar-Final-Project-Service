@@ -14,6 +14,8 @@ async function getProduct(req, res) {
     });
 
     const products = [];
+    let search = req.query.name;
+    console.log(search);
 
     for (let i in listProducts) {
       const ownerProduct = await Users.findByPk(listProducts[i].user_id);
@@ -33,8 +35,18 @@ async function getProduct(req, res) {
       };
       products.push(data);
     }
-    // console.log(products);
-    res.status(200).json({ products: products });
+
+    if (search) {
+      let filterByQuery = [];
+      for (let i in products) {
+        if (products[i].name.toLowerCase().match(search.toLowerCase())) {
+          filterByQuery.push(products[i]);
+        }
+      }
+      res.status(200).json({ products: filterByQuery });
+    } else {
+      res.status(200).json({ products: products });
+    }
   } catch (error) {
     res.json({ error: error.message });
   }
