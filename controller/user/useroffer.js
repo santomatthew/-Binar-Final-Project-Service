@@ -49,6 +49,8 @@ async function userOffer(req, res) {
           title: notification.title,
           name: findProduct.name,
           price: findProduct.price,
+          product_id: findProduct.id,
+          is_sold: findProduct.is_sold,
           bid_price: findOffers[i].price,
           status: findOffers[i].status,
           photo: productPhoto.name,
