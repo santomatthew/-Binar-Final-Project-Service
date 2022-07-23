@@ -41,6 +41,8 @@ async function notification(req, res) {
               price: getProduct.price,
               bid_price: getBid.price,
               bidder_id: getBid.bidder_id,
+              product_id: getProduct.id,
+              is_sold: getProduct.is_sold,
               photo: getPhoto.name,
               date: getNotification[i].createdAt,
             };
@@ -55,6 +57,8 @@ async function notification(req, res) {
                 price: getProduct.price,
                 bid_price: getBid.price,
                 bidder_id: getBid.bidder_id,
+                product_id: getProduct.id,
+                is_sold: getProduct.is_sold,
                 photo: getPhoto.name,
                 message: getNotification[i].message,
                 date: getNotification[i].createdAt,
@@ -67,6 +71,8 @@ async function notification(req, res) {
                 price: getProduct.price,
                 bid_price: getBid.price,
                 bidder_id: getBid.bidder_id,
+                product_id: getProduct.id,
+                is_sold: getProduct.is_sold,
                 photo: getPhoto.name,
                 date: getNotification[i].createdAt,
               };
@@ -79,6 +85,8 @@ async function notification(req, res) {
             name: getProduct.name,
             price: getProduct.price,
             photo: getPhoto.name,
+            product_id: getProduct.id,
+            is_sold: getProduct.is_sold,
             date: getNotification[i].createdAt,
           };
           listNotification.push(notificationData);
