@@ -53,6 +53,7 @@ async function notification(req, res) {
                 name: getProduct.name,
                 price: getProduct.price,
                 bid_price: getBid.price,
+                bidder_id: getBid.bidder_id,
                 photo: getPhoto.name,
                 message: getNotification[i].message,
                 date: getNotification[i].createdAt,
@@ -64,6 +65,7 @@ async function notification(req, res) {
                 name: getProduct.name,
                 price: getProduct.price,
                 bid_price: getBid.price,
+                bidder_id: getBid.bidder_id,
                 photo: getPhoto.name,
                 date: getNotification[i].createdAt,
               };
